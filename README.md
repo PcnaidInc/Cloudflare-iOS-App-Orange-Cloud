@@ -84,6 +84,10 @@ Follow the [Telegram channel](https://t.me/orange_cloud_channel) for release not
 
 Full details, including the contribution workflow and CLA, are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
+### CI
+
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on every pull request and on pushes to `main`. It installs dependencies with pnpm (frozen lockfile), then runs the repository's existing checks: `pnpm lint`, `pnpm changelog:check`, and `pnpm build`. The workflow uses read-only `contents` permissions, pins every action to an immutable commit SHA, and cancels superseded runs via a concurrency group.
+
 ---
 
 ## 中文
