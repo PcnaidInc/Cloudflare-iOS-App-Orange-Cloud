@@ -4,7 +4,7 @@
 // 包一层入口 worker —— 复用生成的 fetch，补一个 scheduled() 跑每日榜单抓取，
 // 并把 wrangler 的 main 指向本文件。沿用同一个 worker / 同一个 IAP_DB 绑定。
 
-// @ts-ignore .open-next/worker.js 在 `opennextjs-cloudflare build` 时生成
+// @ts-expect-error .open-next/worker.js 在 `opennextjs-cloudflare build` 时生成
 import { default as handler } from "./.open-next/worker.js";
 import { captureRanks } from "./src/lib/ranks/capture";
 
@@ -18,5 +18,5 @@ export default {
 } satisfies ExportedHandler<CloudflareEnv>;
 
 // 再导出生成 worker 的 Durable Object 类（OpenNext 缓存层用；全量再导出以兼容后续启用缓存）。
-// @ts-ignore .open-next/worker.js 在 build 时生成
+// @ts-expect-error .open-next/worker.js 在 build 时生成
 export { DOQueueHandler, DOShardedTagCache, BucketCachePurge } from "./.open-next/worker.js";
