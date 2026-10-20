@@ -18,13 +18,10 @@ function progressAndPhase(date: Date): { t: number; isDay: boolean } {
 }
 
 export default function HorizonArc({ className = "" }: { className?: string }) {
-	// SSR 先画正午太阳，挂载后切到访客本地时间，每分钟自走
-	const [state, setState] = useState({ t: 0.5, isDay: true });
+	const [state, setState] = useState(() => progressAndPhase(new Date()));
 
 	useEffect(() => {
-		const update = () => setState(progressAndPhase(new Date()));
-		update();
-		const timer = setInterval(update, 60_000);
+		const timer = setInterval(() => setState(progressAndPhase(new Date())), 60_000);
 		return () => clearInterval(timer);
 	}, []);
 

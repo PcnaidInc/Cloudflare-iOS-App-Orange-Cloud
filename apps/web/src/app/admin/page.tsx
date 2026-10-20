@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
@@ -54,6 +55,8 @@ export default async function AdminDashboardPage({
 	}
 	const query = linkParams.toString();
 
+	const now = Date.now();
+
 	// Suspense keys: sections keyed on the filter signature re-suspend (show a
 	// skeleton) when filters change; the table sections also include their page
 	// cursor, so paginating shows a skeleton for just that table.
@@ -75,13 +78,13 @@ export default async function AdminDashboardPage({
 					</div>
 					<div className="flex items-center gap-3">
 						<TimezoneToggle />
-						<UpdatedAt ms={Date.now()} />
-						<a
+						<UpdatedAt ms={now} />
+						<Link
 							href="/admin/logout"
 							className="text-xs whitespace-nowrap text-muted transition-colors hover:text-foreground"
 						>
 							退出
-						</a>
+						</Link>
 					</div>
 				</div>
 				<div className="mt-5">
